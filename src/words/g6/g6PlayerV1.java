@@ -3,9 +3,7 @@ package words.g6;
 import words.core.*;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
+import java.util.*;
 
 public class g6PlayerV1 extends Player{
 
@@ -44,49 +42,34 @@ public class g6PlayerV1 extends Player{
 
         List<Character> myLettersHypothetical = new ArrayList<>(this.myLetters);
 
-
-        List<Character> vowels = new ArrayList<>();
-        vowels.add('a');
-        vowels.add('e');
-        vowels.add('i');
-        vowels.add('o');
-        vowels.add('u');
+        int round = 0;
 
         char currentbidLetter = bidLetter.getCharacter();
         int bidLetterValue = bidLetter.getValue();
         int myBid = 0;
 
-        int occurrences = Collections.frequency(playerList, currentbidLetter);
-
         myLettersHypothetical.add(currentbidLetter);
         String endingWordHypo = returnHypoWord(myLettersHypothetical);
         String endingWord = returnWord();
-//
+
         int scoreHypo = ScrabbleValues.getWordScore(endingWordHypo);
         int scoreNow = ScrabbleValues.getWordScore(endingWord);
 
+        //System.err.println("scoreHypo : " +  scoreHypo);
+        //System.err.println("scoreNow :" + scoreNow);
+
+
+
         if (scoreHypo >= scoreNow) {
-            myBid = 3;
+
+            myBid = numPlayers;
         }
 
-//       if (!vowels.contains(currentbidLetter) && occurrences <= 1){
-//            myBid = 2;
-//        }
-//
-          //if (occurrences > 2){
-//            myBid = 4;
-         // }
-//
-//        if (vowels.contains(currentbidLetter)){
-//            myBid = 3;
-//        }
-//
+
+        //myBid = Math.min(scoreNow, (scoreHypo-scoreNow));
         return myBid;
         }
-//    }
-//
+    }
 
 
 
-
-}
