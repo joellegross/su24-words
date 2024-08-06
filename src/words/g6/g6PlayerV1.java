@@ -2,7 +2,6 @@ package words.g6;
 
 import words.core.*;
 
-import javax.swing.*;
 import java.util.*;
 
 public class g6PlayerV1 extends Player{
@@ -61,8 +60,8 @@ public class g6PlayerV1 extends Player{
 
 
         if (scoreHypo >= scoreNow) {
-
-            myBid = numPlayers;
+            myBid = 3;
+            //myBid = numPlayers;
         }
 
 
