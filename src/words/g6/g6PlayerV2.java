@@ -132,16 +132,21 @@ public class g6PlayerV2 extends Player {
 
         }
 
+        System.err.println("Player bid list size:" +playerBidList.size());
         if (scoreNow > 50) {
             myBid = 1;
         }
 
-        int charCount = Collections.frequency(myLetters, currentbidLetter);
-
-        if (charCount >= 2) {
-            myBid = 2;
-
+        if(scoreInThisRound <25){
+            myBid = 1;
         }
+
+        //int charCount = Collections.frequency(myLetters, currentbidLetter);
+
+        //if (charCount >= 2) {
+          //  myBid = 2;
+
+        //}
         return myBid;
 
 
