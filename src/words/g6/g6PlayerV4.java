@@ -101,6 +101,8 @@ public class g6PlayerV4 extends Player {
                    int totalRounds, ArrayList<String> playerList,
                    SecretState secretstate, int playerID) {
 
+        int bidLetterCounter =0;
+
         List<Character> myLettersHypothetical = new ArrayList<>(myLetters);
 
         char currentbidLetter = bidLetter.getCharacter();
@@ -109,8 +111,14 @@ public class g6PlayerV4 extends Player {
 
         int scoreInThisRound = secretstate.getScore();
 
-        if (myLetters.size() <= 3 ) {
-            myBid = numPlayers+1;
+        // bids low for the first round of bids or until it has three letters
+
+        if(bidLetterCounter ==0){
+            myBid = numPlayers;
+        }
+//
+        if (bidLetterCounter < numPlayers || myLetters.size() <= 3) {
+                myBid = 3;
 
         }
 
@@ -118,8 +126,9 @@ public class g6PlayerV4 extends Player {
         ArrayList<Integer> allBidValues = new ArrayList<>();
         int maxBidValue =5;
 
+        //then it learns from the bids of the other players
 
-        if(myLetters.size()>3) {
+        if(bidLetterCounter > numPlayers) {
             for (int i = 0; i < playerBidList.size(); i++) {
 
                 ArrayList<Integer> bids = playerBidList.get(i).getBidValues();
@@ -152,11 +161,12 @@ public class g6PlayerV4 extends Player {
 
         }
 
+
         System.err.println("Player bid list size:" +playerBidList.size());
         if (scoreNow > 50) {
             myBid = 0;
         }
-
+        bidLetterCounter ++;
         return myBid;
 
 
