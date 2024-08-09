@@ -42,7 +42,7 @@ public class g6PlayerV5 extends Player {
     @Override
     public void startNewRound(SecretState secretstate) {
         myLetters.clear(); // clear the letters that I have
-        // this puts the secret letters into the currentLetters List
+        
         myLetters.addAll(secretstate.getSecretLetters().stream().map(Letter::getCharacter).toList());
 
         playerLetters.clear(); // clear the letters that all the players have
@@ -50,7 +50,7 @@ public class g6PlayerV5 extends Player {
             playerLetters.add(new LinkedList<Character>()); // initialize each player's list of letters
         }
 
-        // Reset or update any round-specific variables
+      
         remainingRounds--; // Decrement the remaining rounds
     }
 
@@ -60,7 +60,7 @@ public class g6PlayerV5 extends Player {
                 .map(String::valueOf)
                 .collect(Collectors.joining());
 
-        // Iterate through the word list to find the best word we can build
+       
         Word ourletters = new Word(s);
         Word bestword = new Word("");
         for (Word w : wordlist) {
@@ -108,21 +108,21 @@ public class g6PlayerV5 extends Player {
 
         int scoreInThisRound = secretstate.getScore();
 
-        // Initialize bidLetterCounter if it's the first bid of the game
+        // Initialize bidLetterCounter 
         int bidLetterCounter = previousRoundMinBids.isEmpty() ? 0 : previousRoundMinBids.size() + 1;
 
         if (bidLetterCounter == 1) {
             // For the first round, bid 3
             myBid = initialBid;
         } else {
-            // For subsequent rounds, bid 1 plus the minimum bid from the second-to-last round
+            
             if (previousRoundMinBids.size() > 1) {
                 int minBidSecondLastRound = previousRoundMinBids.get(previousRoundMinBids.size() - 2);
                 myBid = 1 + minBidSecondLastRound;
             }
         }
 
-        // Check if we can form a high-scoring word
+        
         if (canFormHighScoringWord()) {
             myBid = 0;
         } else {
