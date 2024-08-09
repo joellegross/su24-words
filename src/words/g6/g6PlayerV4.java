@@ -118,7 +118,12 @@ public class g6PlayerV4 extends Player {
         }
 //
         if (bidLetterCounter < numPlayers || myLetters.size() <= 3) {
-                myBid = 3;
+
+                if(numPlayers >= 4){
+                    myBid = 3;
+                }
+                else{
+                myBid = 6 ;}
 
         }
 
@@ -126,7 +131,7 @@ public class g6PlayerV4 extends Player {
         ArrayList<Integer> allBidValues = new ArrayList<>();
         int maxBidValue =5;
 
-        //then it learns from the bids of the other players
+        //then it learns from the bids of the other players, and bids highly if it wants the letter
 
         if(bidLetterCounter > numPlayers) {
             for (int i = 0; i < playerBidList.size(); i++) {
@@ -151,9 +156,6 @@ public class g6PlayerV4 extends Player {
         int scoreHypo = ScrabbleValues.getWordScore(endingWordHypo);
         int scoreNow = ScrabbleValues.getWordScore(endingWord);
 
-        System.err.println("scoreHypo : " + scoreHypo);
-        System.err.println("scoreNow :" + scoreNow);
-
 
         if (scoreHypo > scoreNow) {
 
@@ -162,7 +164,6 @@ public class g6PlayerV4 extends Player {
         }
 
 
-        System.err.println("Player bid list size:" +playerBidList.size());
         if (scoreNow > 50) {
             myBid = 0;
         }
